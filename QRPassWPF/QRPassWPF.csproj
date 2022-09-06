@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\add-cross-outlined-symbol.png" />
+    <None Remove="Assets\cells.png" />
+    <None Remove="Assets\history %282%29.png" />
+    <None Remove="Assets\history.png" />
+    <None Remove="Assets\list.png" />
+    <None Remove="Assets\logs.png" />
+    <None Remove="Assets\menu %281%29.png" />
+    <None Remove="Assets\minus-outline.png" />
+    <None Remove="Assets\minus-sign.png" />
+    <None Remove="Assets\minus.png" />
+    <None Remove="Assets\ostankino.png" />
+    <None Remove="Assets\papamozh.jpg" />
+    <None Remove="Assets\pencil.png" />
+    <None Remove="Assets\pig.png" />
+    <None Remove="Assets\pig1.png" />
+    <None Remove="Assets\pigrun.gif" />
+    <None Remove="Assets\pigrun1.gif" />
+    <None Remove="Assets\plus.png" />
+    <None Remove="Assets\table.png" />
+    <None Remove="Assets\worker.png" />
+    <None Remove="Assets\workers.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\add-cross-outlined-symbol.png" />
+    <Resource Include="Assets\cells.png" />
+    <Resource Include="Assets\history (2).png" />
+    <Resource Include="Assets\history.png" />
+    <Resource Include="Assets\list.png" />
+    <Resource Include="Assets\logs.png" />
+    <Resource Include="Assets\menu (1).png" />
+    <Resource Include="Assets\minus-outline.png" />
+    <Resource Include="Assets\minus-sign.png" />
+    <Resource Include="Assets\minus.png" />
+    <Resource Include="Assets\ostankino.png" />
+    <Resource Include="Assets\papamozh.jpg" />
+    <Resource Include="Assets\pencil.png" />
+    <Resource Include="Assets\pig.png" />
+    <Resource Include="Assets\pig1.png" />
+    <Resource Include="Assets\pigrun.gif" />
+    <Resource Include="Assets\pigrun1.gif" />
+    <Resource Include="Assets\plus.png" />
+    <Resource Include="Assets\worker.png" />
+    <Resource Include="Assets\workers.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\table.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Desktop\ConsoleApp1\ConsoleApp1\QRPassClientApi.csproj" />
+    <ProjectReference Include="..\..\..\QRPassWPF\datagrid2d\DataGrid2DLibrary.csproj" />
+  </ItemGroup>
+
+</Project>

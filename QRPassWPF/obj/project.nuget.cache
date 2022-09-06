@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "QbnVrOhqMArRraiOiyZSZIrmEfz/KhDZEorE1kt6bcN/sIOarL5ho1Sds1q8vK2Q9WFYvyItBCt1188K+VMfww==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\1\\source\\repos\\new\\QRPassTest\\QRPassWPF\\QRPassWPF.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\1\\.nuget\\packages\\jetbrains.annotations\\2022.1.0\\jetbrains.annotations.2022.1.0.nupkg.sha512",
+    "C:\\Users\\1\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

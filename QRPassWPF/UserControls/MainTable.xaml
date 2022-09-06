@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="QRPassWPF.UserControls.MainTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dg2d="clr-namespace:DataGrid2DLibrary;assembly=DataGrid2DLibrary"
+             mc:Ignorable="d"
+             d:DesignHeight="1000" d:DesignWidth="1000"
+             VerticalContentAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             Style="{StaticResource {x:Type UserControl}}">
+
+    
+    <Grid>
+        <dg2d:DataGrid2D Background="White" Name="dataGrid2D" BorderThickness="0"
+               ItemsSource2D="{Binding Lsts}" EnableColumnVirtualization="True" EnableRowVirtualization="True"
+                UseModifiedDataGridStyle="True" Height="1000" 
+             VerticalAlignment="Stretch" RowEditEnding="dataGrid2D_RowEditEnding" FontFamily="SF Pro Display" FontSize="16" LoadingRow="dataGrid2D_LoadingRow" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False">
+            
+        </dg2d:DataGrid2D>
+
+
+    </Grid>
+</UserControl>
