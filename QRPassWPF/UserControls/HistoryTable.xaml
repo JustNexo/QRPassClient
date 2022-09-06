@@ -8,7 +8,8 @@
       mc:Ignorable="d" 
       d:DataContext="{d:DesignInstance Type=local:HistoryTable}"
       d:DesignHeight="1000" d:DesignWidth="1000" Loaded="UserControl_Loaded"
-             Style="{StaticResource {x:Type UserControl}}">
+      Style="{StaticResource {x:Type UserControl}}"
+      >
 
     <UserControl.Resources>
         <src:WidthConverter x:Key="Converter"/>

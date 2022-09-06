@@ -11,10 +11,10 @@ namespace QRPassWPF.UserControls
     public partial class MainTable : UserControl
     {
 
-        List<List<string>> lsts = new List<List<string>>
-    {
-    new List<string>{"1", "1", "1"}
-};
+        List<List<string>> lsts = new()
+        {
+            new List<string>{"1", "1", "1"}
+        };
         public List<List<string>> Lsts { get => lsts; set => lsts = value; }
 
         public MainTable()

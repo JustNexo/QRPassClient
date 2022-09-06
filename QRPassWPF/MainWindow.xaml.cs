@@ -1,6 +1,7 @@
 ﻿using QRPassWPF.UserControls;
 using System.Windows;
 using System.Windows.Input;
+using QRPassWPF.Model;
 using QRPassWPF.ViewModel;
 
 namespace QRPassWPF
@@ -13,6 +14,8 @@ namespace QRPassWPF
         public MainWindow()
         {
             InitializeComponent();
+            ChangeContent(new MainTable());
+            DataContext = new MainViewModel();
         }
 
 
@@ -34,18 +37,16 @@ namespace QRPassWPF
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+        { 
             ChangeContent(new MainTable());
-
-            var token = UserConfig.Token;
-
+            var user = Singleton<User>.Instance; 
+            var asd =  user.Token;
         }
 
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-         //   ChangeContent(new HistoryTable());
+            ChangeContent(new HistoryTable());
         }
 
         private void btnFullScreen_Checked_1(object sender, RoutedEventArgs e)

@@ -2,9 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="LoginWindow.xaml">
+             xmlns:viewModel="clr-namespace:QRPassWPF.ViewModel"
+             xmlns:views="clr-namespace:QRPassWPF.UserControls"
+             Startup="ApplicationStart">
     <Application.Resources>
-
         <Style x:Key="SFPro">
             <Setter Property="TextElement.FontFamily"
                     Value="/Fonts/#SF Pro Display"></Setter>

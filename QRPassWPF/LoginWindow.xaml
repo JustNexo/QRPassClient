@@ -10,11 +10,16 @@
         d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}">
     
     
+
+    
+    
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0" />
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
+        
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
         
         <Storyboard x:Key="ShakeIt">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" RepeatBehavior="5x">
@@ -67,6 +72,10 @@
         </Style>
      </Window.Resources>
     
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+    </Window.Visibility>
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -115,15 +124,15 @@
                 <!--Note-->
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Добрый день!"
+            <TextBlock Text="Добро пожаловать!"
                      FontSize="30"
                      VerticalAlignment="Center"
                      FontWeight="SemiBold"/>
             
-            <userControls:CustomTextBox Grid.Row="1" PlaceHolder="Login" x:Name="loginTextBox" 
+            <userControls:CustomTextBox Grid.Row="1" PlaceHolder="Логин"
                                         Text="{Binding Login, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
-            <userControls:CustomTextBox Grid.Row="2"  x:Name="passwordTextBox" PlaceHolder="Password"
+            <userControls:CustomTextBox Grid.Row="2"  PlaceHolder="Пароль"
                                      IsPassword="True" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             </userControls:CustomTextBox>
 
@@ -137,13 +146,13 @@
                 </Grid.ColumnDefinitions>
 
                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center"> 
-                    <Label Content="Запомнить меня" FontSize="15"/>
+                    <Label Content="Запомнить меня" FontSize="15" Style="{StaticResource SFPro}"/>
                     <CheckBox IsChecked="{Binding IsSelected,Mode=TwoWay}" VerticalAlignment="Center"/>
                 </WrapPanel>
 
                 <Button
                     IsDefault="True"
-                    Content="Login"
+                    Content="Войти"
                     Grid.Column="1"
                     Command="{Binding LoginCommand}"
                     Style="{StaticResource primaryButton}"
@@ -151,33 +160,30 @@
             </Grid>
             
            
-                <TextBox Grid.Row="4" 
-                         x:Name="LoginErrorText" 
-                         IsReadOnly="True"  
-                         BorderThickness="0" 
-                         HorizontalAlignment="Center"
-                         Foreground="Red"
-                         FontSize="18"
-                         FontWeight="Regular"
-                         Visibility="Collapsed">
-                    Ошибка входа. Неверный логин или пароль
-                    
-                    <TextBox.Resources>
-                        <Storyboard x:Key="TestStoryboard">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)" RepeatBehavior="5x">
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0"/>
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="2"/>
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="-2"/>
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0"/>
-                            </DoubleAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </TextBox.Resources>
-                    <TextBox.RenderTransform>
-                        <TranslateTransform X="0" Y="0" />
-                    </TextBox.RenderTransform>
-                </TextBox>
-            
+              
+            <TextBlock Grid.Row="4" Text="{Binding ErrorMessage, NotifyOnTargetUpdated=True}" 
+                       Foreground="Red" HorizontalAlignment="Center"
+                       FontSize="15" FontWeight="SemiBold"
+                       Style="{StaticResource SFPro}">
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)" RepeatBehavior="5x">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="2"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="-2"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </TextBlock.RenderTransform>
+            </TextBlock>
             
             <TextBlock Grid.Row="4"
                        VerticalAlignment="Bottom"

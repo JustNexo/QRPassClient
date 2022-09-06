@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Security.Principal;
-using System.Threading;
-using System.Windows;
 using System.Windows.Input;
 using QRPassClientApi.Api;
+using QRPassWPF.Model;
+using QRPassWPF.UserControls;
 
 namespace QRPassWPF.ViewModel;
 
 public class LoginViewModel : ViewModelBase
 {
     private string _login;
-        private string _password;
-        private string _errorMessage;
-        private bool _isViewVisible = true;
-        private bool _isSelected;
+    private string _password;
+    private string _errorMessage;
+    private bool _isViewVisible = true;
+    private bool _isSelected;
 
-        private QRPassClient _client = new("");
-        
-        //Properties
+    private QRPassClient _client = new("");
+    
+    //Properties
         public string Login
         {
             get => _login;
@@ -87,19 +81,25 @@ public class LoginViewModel : ViewModelBase
         }
         private async void ExecuteLoginCommand(object obj)
         {
-            var user = await _client.LoginAsync(Login, Password);
-            
-            if (string.IsNullOrEmpty(user.Token))
-            {
-                Thread.CurrentPrincipal = new GenericPrincipal(
-                    new GenericIdentity(Login), null);
+            try
+            { 
+                var user = await _client.LoginAsync(Login, Password);
+                
+                Singleton<User>.Register(() => new User()
+                {
+                    RememberMe = _isSelected,
+                    Token = user.Token,
+                    Firstname = user.FirstName,
+                    Lastname = user.LastName
+                });
+                
                 IsViewVisible = false;
+                
             }
-            else
+            catch (Exception e)
             {
-                ErrorMessage = "* Invalid username or password";
+                ErrorMessage = "Ошибка входа. " + e.Message;
             }
         }
-
-
+        
 }
