@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using QRPassWPF.ViewModel;
 
 namespace QRPassWPF.Model
@@ -18,11 +19,14 @@ namespace QRPassWPF.Model
         {
             get
             {
-                if (RememberMe)
+                try
                 {
                     return TokenService.ReadTokenFromFile();
                 }
-                return _token;
+                catch (Exception e)
+                {
+                    return _token;
+                }
             }
             set
             {

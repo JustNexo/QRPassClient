@@ -6,12 +6,8 @@
         xmlns:viewmodel="clr-namespace:QRPassWPF.ViewModel" 
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="LoginWindow" Height="768" Width="1024" WindowStyle="None" MouseDown="Window_MouseDown"
+        Title="LoginWindow" Height="720" Width="1080" WindowStyle="None" MouseDown="Window_MouseDown"
         d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}">
-    
-    
-
-    
     
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0,0,0,1" CornerRadius="0" />
@@ -20,18 +16,7 @@
     <Window.Resources>
         
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
-        
-        <Storyboard x:Key="ShakeIt">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" RepeatBehavior="5x">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="2"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="-2"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        
-        
+
         <Style x:Key="LinkText" TargetType="{x:Type TextBlock}">
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
@@ -39,7 +24,8 @@
             <Setter Property="MaxWidth" Value="135"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-        <Style x:Key="primaryButton" TargetType="{x:Type Button}">
+        
+        <Style x:Key="PrimaryButton" TargetType="{x:Type Button}">
             <Setter Property="MinWidth" Value="120"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="40"/>
@@ -155,7 +141,7 @@
                     Content="Войти"
                     Grid.Column="1"
                     Command="{Binding LoginCommand}"
-                    Style="{StaticResource primaryButton}"
+                    Style="{StaticResource PrimaryButton}"
                     ></Button>
             </Grid>
             

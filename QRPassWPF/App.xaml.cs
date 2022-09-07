@@ -36,7 +36,6 @@ namespace QRPassWPF
                     }
                 };
             }
-            //TODO: add method to api to validate token
         }
     }
 }

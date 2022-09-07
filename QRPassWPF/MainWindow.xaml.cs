@@ -1,6 +1,8 @@
-﻿using QRPassWPF.UserControls;
+﻿using System;
+using QRPassWPF.UserControls;
 using System.Windows;
 using System.Windows.Input;
+using QRPassClientApi.Api;
 using QRPassWPF.Model;
 using QRPassWPF.ViewModel;
 
@@ -11,13 +13,44 @@ namespace QRPassWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private QRPassClient _client = new("");
         public MainWindow()
         {
+            InitializeUser();
             InitializeComponent();
             ChangeContent(new MainTable());
             DataContext = new MainViewModel();
         }
 
+        private async void InitializeUser()
+        {
+            try
+            {
+                if (Singleton<User>.Instance is null)
+                {
+                    var user = await _client.ValidateToken(TokenService.ReadTokenFromFile());
+                    Singleton<User>.Register(() => new User()
+                    {
+                        Token = user.Token,
+                        Firstname = user.FirstName,
+                        RoleId = user.RoleId,
+                        Lastname = user.LastName
+                    });
+                     
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBoxResult result = MessageBox.Show("Время сессии истекло. Войдите заново", "", MessageBoxButton.OK);
+
+                if (result == MessageBoxResult.OK)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+
+            
+        }
 
         private void ChangeContent(UIElement newContent)
         {
@@ -39,8 +72,6 @@ namespace QRPassWPF
         private void Button_Click(object sender, RoutedEventArgs e)
         { 
             ChangeContent(new MainTable());
-            var user = Singleton<User>.Instance; 
-            var asd =  user.Token;
         }
 
 
