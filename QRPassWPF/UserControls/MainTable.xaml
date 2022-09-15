@@ -19,6 +19,7 @@
                UseModifiedDataGridStyle="True"   HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                VerticalAlignment="Stretch" FontFamily="SF Pro Display"
                FontSize="20" CanUserReorderColumns="False"
+               CellEditEnding="DataGrid2D_OnCellEditEnding"
                CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="True"
                BeginningEdit="DataGrid2D_OnBeginningEdit"/>
     </Grid>

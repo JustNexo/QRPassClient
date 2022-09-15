@@ -215,8 +215,8 @@
             <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
             <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="True"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="ListView.ItemsSource" Value="{Binding}"/>
-            <Setter Property="ListView.View">
+            <Setter Property="ItemsSource" Value="{Binding}"/>
+            <Setter Property="View">
                 <Setter.Value>
                     <GridView>
                         <GridViewColumn Header="№" Width="Auto">
@@ -294,8 +294,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="5,5,5,5" Style="{DynamicResource lvStyle}"  d:ItemsSource="{d:SampleData ItemCount=5}"/>
-
+        <ListView Grid.Row="0" Margin="5,5,5,5" Style="{DynamicResource lvStyle}"  d:ItemsSource="{d:SampleData ItemCount=5}" />
+        
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,25" Grid.ColumnSpan="2">
             <local:CustomTextBox PlaceHolder="ID"/>

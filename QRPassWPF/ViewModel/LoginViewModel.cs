@@ -84,7 +84,7 @@ public class LoginViewModel : ViewModelBase
             try
             { 
                 var user = await _client.LoginAsync(Login, Password);
-                
+              
                 Singleton<User>.Register(() => new User()
                 {
                     RememberMe = _isSelected,

@@ -6,7 +6,7 @@ namespace QRPassWPF
 {
     class HTTP
     {
-        string BaseAddress = "https://qrpasscon.ru/";
+        string BaseAddress = "https://testing.qrpasscon.ru/";
         string requsetUri;
         string name;
         string value;

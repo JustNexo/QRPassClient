@@ -27,7 +27,7 @@ public class HistoryListProvider :  IItemsProvider<HistoryJson>
     {
         Thread.Sleep(_fetchDelay);
 
-        string resultContent = request.setRequestUri("/getlogs.php").get();
+        string resultContent = request.setRequestUri("/getlogs.php?token=[value-6]").get();
 
         var responseJson = JsonConvert.DeserializeObject<ObservableCollection<HistoryJson>>(resultContent);
 
@@ -46,7 +46,7 @@ public class HistoryListProvider :  IItemsProvider<HistoryJson>
 
     private int GetCount()
     {
-        string resultContent = request.setRequestUri("/getlogs.php").get();
+        string resultContent = request.setRequestUri("/getlogs?token=[value-6].php").get();
 
         var responseJson = JsonConvert.DeserializeObject<ObservableCollection<HistoryJson>>(resultContent);
         return responseJson.Count;

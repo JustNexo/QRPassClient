@@ -16,7 +16,7 @@ namespace QRPassWPF
         private QRPassClient _client = new("");
         public MainWindow()
         {
-            InitializeUser();
+          //  InitializeUser();
             InitializeComponent();
             ChangeContent(new MainTable());
             DataContext = new MainViewModel();

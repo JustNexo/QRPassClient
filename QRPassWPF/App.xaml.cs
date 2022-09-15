@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using QRPassClientApi.Api;
 using QRPassWPF.Model;
 using QRPassWPF.ViewModel;
 
@@ -15,11 +11,20 @@ namespace QRPassWPF
     /// </summary>
     public partial class App : Application
     {
-        private void ApplicationStart(object sender, StartupEventArgs e)
+        private async void ApplicationStart(object sender, StartupEventArgs e)
         {
+            QRPassClient client = new QRPassClient("");
             try
             {
-                TokenService.ReadTokenFromFile();
+                var user = await client.ValidateToken(TokenService.ReadTokenFromFile());
+                
+                Singleton<User>.Register(() => new User()
+                {
+                    RememberMe = true,
+                    Token = user.Token,
+                    Firstname = user.FirstName,
+                    Lastname = user.LastName
+                });
                 
                 var mainView = new MainWindow();
                 mainView.Show();
