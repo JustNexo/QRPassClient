@@ -34,15 +34,15 @@ namespace QRPassWPF.UserControls
 
             //   mainTable.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
         }
-        
-        private void dataGrid2D_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
 
-        }
-
-        private void dataGrid2D_LoadingRow(object sender, DataGridRowEventArgs e)
+        private void DataGrid2D_OnBeginningEdit(object? sender, DataGridBeginningEditEventArgs e)
         {
-            //    dataGrid2D.Items.Add("asdasd");
+            var row = e.Row.Header;
+            var column = e.Column.Header;
+            if (row == column)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

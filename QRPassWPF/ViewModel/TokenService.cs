@@ -2,6 +2,8 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using QRPassClientApi.Api;
+using QRPassWPF.Model;
 
 namespace QRPassWPF.ViewModel;
 

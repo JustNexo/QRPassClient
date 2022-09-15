@@ -37,7 +37,7 @@ namespace QRPassWPF.UserControls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             HistoryListProvider customerProvider =
-                           new HistoryListProvider(100, 1);
+                           new HistoryListProvider(1);
 
             DataContext = new VirtualizingCollection<HistoryJson>(customerProvider, 100);
         }

@@ -16,9 +16,10 @@
     <Grid >
         <dg2d:DataGrid2D Background="White" Name="dataGrid2D" BorderThickness="0"
                ItemsSource2D="{Binding Lsts}" EnableColumnVirtualization="True" EnableRowVirtualization="True"
-               UseModifiedDataGridStyle="True"
-               VerticalAlignment="Stretch" RowEditEnding="dataGrid2D_RowEditEnding" FontFamily="SF Pro Display"
-               FontSize="20" LoadingRow="dataGrid2D_LoadingRow" CanUserReorderColumns="False"
-               CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
+               UseModifiedDataGridStyle="True"   HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+               VerticalAlignment="Stretch" FontFamily="SF Pro Display"
+               FontSize="20" CanUserReorderColumns="False"
+               CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="True"
+               BeginningEdit="DataGrid2D_OnBeginningEdit"/>
     </Grid>
 </UserControl>

@@ -11,9 +11,9 @@ public class HistoryListProvider :  IItemsProvider<HistoryJson>
     private readonly int _fetchDelay;
     HTTP request = new();
 
-    public HistoryListProvider(int count, int fetchDelay)
+    public HistoryListProvider(int fetchDelay)
     {
-        _count = count;
+        _count = GetCount();
         _fetchDelay = fetchDelay;
     }
 
@@ -32,6 +32,7 @@ public class HistoryListProvider :  IItemsProvider<HistoryJson>
         var responseJson = JsonConvert.DeserializeObject<ObservableCollection<HistoryJson>>(resultContent);
 
         List<HistoryJson> list = new List<HistoryJson>();
+
         for (int i = startIndex; i < startIndex + count && i < responseJson.Count; i++)
         {
             HistoryJson customer = new HistoryJson { Id = responseJson[i].Id, UserId = responseJson[i].UserId, FullName = responseJson[i].FullName, 
@@ -41,6 +42,14 @@ public class HistoryListProvider :  IItemsProvider<HistoryJson>
             list.Add(customer);
         }
         return list;
+    }
+
+    private int GetCount()
+    {
+        string resultContent = request.setRequestUri("/getlogs.php").get();
+
+        var responseJson = JsonConvert.DeserializeObject<ObservableCollection<HistoryJson>>(resultContent);
+        return responseJson.Count;
     }
 }
 

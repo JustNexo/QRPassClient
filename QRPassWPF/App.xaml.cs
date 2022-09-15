@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using QRPassWPF.Model;
 using QRPassWPF.ViewModel;
 
 namespace QRPassWPF
@@ -19,6 +20,7 @@ namespace QRPassWPF
             try
             {
                 TokenService.ReadTokenFromFile();
+                
                 var mainView = new MainWindow();
                 mainView.Show();
             }
