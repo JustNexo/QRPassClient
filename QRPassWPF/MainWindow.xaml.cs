@@ -26,10 +26,10 @@ namespace QRPassWPF
         {
             try
             {
-                if (Singleton<User>.Instance is null)
+                if (Singleton<UserType>.Instance is null)
                 {
                     var user = await _client.ValidateToken(TokenService.ReadTokenFromFile());
-                    Singleton<User>.Register(() => new User()
+                    Singleton<UserType>.Register(() => new UserType()
                     {
                         Token = user.Token,
                         Firstname = user.FirstName,

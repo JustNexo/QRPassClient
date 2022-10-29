@@ -13,7 +13,7 @@ namespace QRPassWPF.UserControls;
 /// </summary>
 public partial class MainTable : UserControl
 {
-    private QRPassClient _client = new(Singleton<User>.Instance?.Token);
+    private QRPassClient _client = new(Singleton<UserType>.Instance?.Token);
 
     List<List<string>> lsts = new()
     {

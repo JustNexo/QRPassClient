@@ -4,7 +4,7 @@ using QRPassWPF.ViewModel;
 
 namespace QRPassWPF.Model
 {
-    public  class User
+    public  class UserType
     {
         public bool RememberMe { get; set; }
         public string Firstname { get; set; }

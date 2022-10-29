@@ -6,7 +6,11 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows;
 using System.Text.RegularExpressions;
+using QRPassClientApi.Api;
+using QRPassClientApi.Api.Types;
+using QRPassWPF.Model;
 using QRPassWPF.ViewModel;
+using User = QRPassClientApi.Api.Types.User;
 
 namespace QRPassWPF.UserControls
 {
@@ -15,31 +19,18 @@ namespace QRPassWPF.UserControls
     /// </summary>
     public partial class HistoryTable : UserControl
     {
-        HTTP request = new HTTP();
-
+        private QRPassClient Client = new(Singleton<UserType>.Instance?.Token);
         public HistoryTable()
         {
-            DataContext = this;
+            InitializeList();
             InitializeComponent();
-            
+            DataContext = new HistoryViewModel();
         }
 
-        private int GetListCount()
+        private async void InitializeList()
         {
-            string resultContent = request.setRequestUri("/getlogs.php").get();
-
-            var y = JsonConvert.DeserializeObject<ObservableCollection<HistoryJson>>(resultContent);
-
-            return y.Count;
-        }
-
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            HistoryListProvider customerProvider =
-                           new HistoryListProvider(1);
-
-            DataContext = new VirtualizingCollection<HistoryJson>(customerProvider, 100);
+          var history= await Client.GetHistoryAsync(2000);
+          //DataContext = history;
         }
     }
 }

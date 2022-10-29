@@ -18,7 +18,7 @@ namespace QRPassWPF
             {
                 var user = await client.ValidateToken(TokenService.ReadTokenFromFile());
                 
-                Singleton<User>.Register(() => new User()
+                Singleton<UserType>.Register(() => new UserType()
                 {
                     RememberMe = true,
                     Token = user.Token,
