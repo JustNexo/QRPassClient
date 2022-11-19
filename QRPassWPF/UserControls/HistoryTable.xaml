@@ -5,7 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QRPassWPF.UserControls" 
       xmlns:src="clr-namespace:QRPassWPF.ViewModel"
-      xmlns:viewmodel="clr-namespace:QRPassWPF.ViewModel" 
+      xmlns:viewmodel="clr-namespace:QRPassWPF.ViewModel"
+      xmlns:model="clr-namespace:QRPassWPF.Model"
       mc:Ignorable="d" 
       d:DataContext="{d:DesignInstance Type=viewmodel:HistoryViewModel}"
       d:DesignHeight="1000" d:DesignWidth="1000"
@@ -328,12 +329,14 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0" Margin="5,5,5,5" Style="{DynamicResource ListviewStyle}"  d:ItemsSource="{d:SampleData ItemCount=5}" />
+        <ListView Name="listView" Grid.Row="0" Margin="5,5,5,5" Style="{DynamicResource ListviewStyle}"  d:ItemsSource="{d:SampleData ItemCount=5}" />
         
-
+     
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,25" Grid.ColumnSpan="2">
-            <local:CustomTextBox PlaceHolder="ID"/>
-            <local:CustomTextBox PlaceHolder="№"/>
+            <TextBox Style="{StaticResource placeHolder}" Tag="ID сотрудника" HorizontalAlignment="Left" Height="40" 
+                     Margin="22,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="userIdFilter"/>
+            <TextBox Style="{StaticResource placeHolder}" Tag="ID сотрудника" HorizontalAlignment="Left" Height="40" 
+                     Margin="22,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="fullNameFilter"/>
             <local:CustomTextBox PlaceHolder="ФИО"/>
             <ComboBox VerticalAlignment="Center" Margin="0,15,0,0" Height="40">
                 <ComboBoxItem Name="null"></ComboBoxItem>

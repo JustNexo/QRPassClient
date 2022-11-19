@@ -17,7 +17,7 @@ public class History
         public string UserId { get; set; }
 
         [JsonProperty("fullname")]
-        public string Fullname { get; set; }
+        public string FullName { get; set; }
 
         /// <summary>
         /// Action that made worker e.g.: Выход с объекта

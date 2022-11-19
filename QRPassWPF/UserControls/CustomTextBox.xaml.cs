@@ -11,6 +11,7 @@ namespace QRPassWPF.UserControls
         public CustomTextBox()
         {
             InitializeComponent();
+            
         }
 
         public string PlaceHolder
@@ -23,8 +24,7 @@ namespace QRPassWPF.UserControls
         public static readonly DependencyProperty PlaceHolderProperty =
             DependencyProperty.Register(nameof(PlaceHolder), typeof(string), typeof(CustomTextBox));
 
-
-
+        
 
         public string Text
         {
@@ -36,8 +36,8 @@ namespace QRPassWPF.UserControls
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(CustomTextBox));
 
-
-
+        
+        
         public bool IsPassword
         {
             get { return (bool)GetValue(IsPasswordProperty); }
@@ -46,7 +46,7 @@ namespace QRPassWPF.UserControls
 
         // Using a DependencyProperty as the backing store for IsPassword.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsPasswordProperty =
-            DependencyProperty.Register("IsPassword", typeof(bool), typeof(CustomTextBox));
+            DependencyProperty.Register(nameof(IsPassword), typeof(bool), typeof(CustomTextBox));
 
         private void passBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
