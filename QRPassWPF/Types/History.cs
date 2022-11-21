@@ -13,8 +13,8 @@ public class History
         /// <summary>
         /// Unique id for each user
         /// </summary>
-        [JsonProperty("user_id")]
-        public string UserId { get; set; }
+        [JsonProperty("employee_id")]
+        public string EmployeeId { get; set; }
 
         [JsonProperty("fullname")]
         public string FullName { get; set; }

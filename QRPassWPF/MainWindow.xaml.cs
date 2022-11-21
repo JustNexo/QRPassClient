@@ -54,7 +54,10 @@ namespace QRPassWPF
 
         private void ChangeContent(UIElement newContent)
         {
-            TransitionContainer.Navigate(newContent);
+            if (!Equals(TransitionContainer.Content, newContent))
+            {
+                TransitionContainer.Navigate(newContent);
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -77,7 +80,7 @@ namespace QRPassWPF
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ChangeContent(new HistoryTable());
+            
         }
 
         private void btnFullScreen_Checked_1(object sender, RoutedEventArgs e)
@@ -99,5 +102,14 @@ namespace QRPassWPF
 
         }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            ChangeContent(new HistoryTable());
+        }
     }
 }

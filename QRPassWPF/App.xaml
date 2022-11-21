@@ -9,10 +9,12 @@
     <Application.Resources>
         <Style x:Key="SFPro">
             <Setter Property="TextElement.FontFamily"
-                    Value="/Fonts/#SF Pro Display"></Setter>
+                    Value="/Fonts/#SF Pro Display"/>
         </Style>
 
         <Style TargetType="{x:Type UserControl}">
+            <Setter Property="FontFamily"
+                    Value="/Fonts/#SF Pro Display"/>
             <Style.Triggers>
                 <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                     <BeginStoryboard>

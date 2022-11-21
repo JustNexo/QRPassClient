@@ -219,7 +219,6 @@
             <Style.Triggers>
             </Style.Triggers>
         </Style>
-
         <!-- SimpleStyles: ComboBoxItem -->
         <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -234,7 +233,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsHighlighted" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="#FF01A3FF"/>
+                                <Setter TargetName="Border" Property="Background" Value="#3880bf"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Foreground" Value="#888888"/>
@@ -244,8 +243,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
         <Style x:Key="ListviewStyle" TargetType="{x:Type ListView}">
             <Setter Property="Foreground" Value="#FF0A0101"/>
+            <Setter Property="FontSize" Value="17"/>
             <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
             <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
             <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="True"/>
@@ -264,7 +267,7 @@
                         <GridViewColumn Header="ID" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding UserId}"/>
+                                    <TextBlock Text="{Binding EmployeeId}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -320,6 +323,31 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <ControlTemplate x:Key="controlTemplate" TargetType="{x:Type ListViewItem}">
+            <Border Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    SnapsToDevicePixels="true">
+                <GridViewRowPresenter 
+                                    Content="{TemplateBinding DataContext}"
+                                      Margin="0,0,0,0"/>
+            </Border>
+        </ControlTemplate>
+        
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsSelected" Value="true" />
+                        <Condition Property="Selector.IsSelectionActive" Value="true" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="#3880bf"/>
+                    <Setter Property="Template" Value="{StaticResource controlTemplate}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
 
     <Grid >
@@ -334,22 +362,22 @@
      
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,25" Grid.ColumnSpan="2">
             <TextBox Style="{StaticResource placeHolder}" Tag="ID сотрудника" HorizontalAlignment="Left" Height="40" 
-                     Margin="22,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="userIdFilter"/>
-            <TextBox Style="{StaticResource placeHolder}" Tag="ID сотрудника" HorizontalAlignment="Left" Height="40" 
+                     Margin="22,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="employeeIdFilter"/>
+            <TextBox Style="{StaticResource placeHolder}" Tag="ФИО сотрудника" HorizontalAlignment="Left" Height="40" 
                      Margin="22,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="fullNameFilter"/>
-            <local:CustomTextBox PlaceHolder="ФИО"/>
-            <ComboBox VerticalAlignment="Center" Margin="0,15,0,0" Height="40">
-                <ComboBoxItem Name="null"></ComboBoxItem>
+            <ComboBox VerticalAlignment="Center" Margin="22,22,0,0" Height="40" Name="ActionComboBoxFilter"> 
+                <ComboBoxItem Name="null">------</ComboBoxItem>
                 <ComboBoxItem Name="exitfromobj">Выход с объекта</ComboBoxItem>
                 <ComboBoxItem Name="entertoobj">Вход на объект</ComboBoxItem>
                 <ComboBoxItem Name="quarantine">Нарушение сроков карантина</ComboBoxItem>
                 <ComboBoxItem Name="exitnotregistred">Выход не зарегестрирован</ComboBoxItem>
             </ComboBox>
-            <local:CustomTextBox PlaceHolder="Пред.Действие"/>
-            <local:CustomTextBox PlaceHolder="ФИО"/>
-            <local:CustomTextBox PlaceHolder="ФИО"/>
-            <local:CustomTextBox PlaceHolder="ФИО"/>
+            <TextBox Style="{StaticResource placeHolder}" Tag="Предыдущий объект" HorizontalAlignment="Left" Height="40" 
+                     Margin="22,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="prevObjectFilter"/>
+            <TextBox Style="{StaticResource placeHolder}" Tag="Текущий объект" HorizontalAlignment="Left" Height="40" 
+                     Margin="22,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="currentObjectFilter"/>
             <Button
+                Margin="22,22,0,0"
                 IsDefault="True"
                 Content="Выгрузить в excel"
                 Command="{Binding ExportToExcel}"

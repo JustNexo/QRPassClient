@@ -31,7 +31,7 @@
 
                                 <!-- Window border and dropshadown -->
                                 <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=1}"
-                                    Background="#FF01A3FF">
+                                    Background="#3880bf">
                                     <Border.Effect>
                                         <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
                                     </Border.Effect>
@@ -69,15 +69,12 @@
 
                                         
                                         <!-- Title -->
-                                        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
+                                       <!-- <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
                                             <StackPanel>
-                                                <TextBlock  Text="&quot;ООО&quot; Останкино" 
-                                                            Style="{StaticResource SFPro}" FontSize="15" Margin="0,0,0,0"
-                                                            />
 
                                             </StackPanel>
                                         </Viewbox>
-
+                                        -->
                                         <!-- Window Buttons -->
                                         <StackPanel Grid.Column="2" Orientation="Horizontal">
                                             <ToggleButton Name="btnFullScreen"  Content="⛶" Background="Transparent" Width="30" Height="30"
@@ -160,8 +157,17 @@
                                Style="{StaticResource SFPro}" FontSize="15">ТСТ</Label>
                     </StackPanel>
                 </Button>
+                <Button Background="Transparent" BorderThickness="0" Click="Button_Click_2">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Assets/table.png"
+                               Width="64"
+                               Height="64"/>
+                        <Label Padding="0" VerticalAlignment="Top" HorizontalAlignment="Center"
+                               Style="{StaticResource SFPro}" FontSize="15">ТСТ</Label>
+                    </StackPanel>
+                </Button>
 
-                <Button Background="Transparent" BorderThickness="0">
+                <Button Background="Transparent" BorderThickness="0" Click="ButtonBase_OnClick">
                     <StackPanel Orientation="Vertical">
                         <Image Source="/Assets/history.png"
                                Width="64"
@@ -177,7 +183,7 @@
                                Width="64"
                                Height="64"/>
                         <Label Padding="0" VerticalAlignment="Top" HorizontalAlignment="Center"
-                               Style="{StaticResource SFPro}" FontSize="15">Работники</Label>
+                               Style="{StaticResource SFPro}" FontSize="15">Cотрудники</Label>
                     </StackPanel>
                 </Button>
 
@@ -187,7 +193,7 @@
                                Width="64"
                                Height="64"/>
                         <Label Padding="0" VerticalAlignment="Top" HorizontalAlignment="Center"
-                               Style="{StaticResource SFPro}" FontSize="15">Логирование</Label>
+                               Style="{StaticResource SFPro}"  FontSize="15">Логирование</Label>
                     </StackPanel>
                 </Button>
                 <Button Background="Transparent" BorderThickness="0">

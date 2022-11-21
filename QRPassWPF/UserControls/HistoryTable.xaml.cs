@@ -14,7 +14,7 @@ namespace QRPassWPF.UserControls
     /// <summary>
     /// Логика взаимодействия для ScotTable.xaml
     /// </summary>
-    public partial class HistoryTable : UserControl
+    public partial class HistoryTable
     {
         private QRPassClient Client = new(Singleton<UserType>.Instance?.Token);
 
@@ -26,36 +26,46 @@ namespace QRPassWPF.UserControls
             
             
             fullNameFilter.TextChanged += IdFilterOnTextChanged;
-            userIdFilter.TextChanged += IdFilterOnTextChanged;
+            employeeIdFilter.TextChanged += IdFilterOnTextChanged;
+            ActionComboBoxFilter.DropDownClosed += ActionComboBoxFilterOnDropDownClosed;
+            prevObjectFilter.TextChanged += IdFilterOnTextChanged;
+            currentObjectFilter.TextChanged += IdFilterOnTextChanged;
         }
 
-        private void IdFilterOnTextChanged(object sender, TextChangedEventArgs e)
+        private void ActionComboBoxFilterOnDropDownClosed(object? sender, EventArgs e)
         {
-            TextBox? textBox = sender as TextBox;
             ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(listView.ItemsSource);
             view?.Refresh();
-
+        }
+        
+        private async void IdFilterOnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(listView.ItemsSource);
+            await Task.Delay(2); //not blocking ui thread
+            view?.Refresh();
         }
 
         private async Task InitializeList()
         {
             var history =  await Client.GetHistoryAsync(2000);
             DataContext = history;
-            
+
             GroupFilter gf = new GroupFilter();
-            gf.AddFilter(UserIdFilter);
+            gf.AddFilter(EmployeeIdFilter);
             gf.AddFilter(FullNameFilter);
-            
+            gf.AddFilter(ActionFilter);
+            gf.AddFilter(CurrentObjectFilter);
+            gf.AddFilter(PrevObjectFilter);
             ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(listView.ItemsSource); 
             view.Filter = gf.Filter;
         }
         
 
-        private bool UserIdFilter (object item)
+        private bool EmployeeIdFilter (object item)
         {
-            if(String.IsNullOrEmpty(userIdFilter.Text))
+            if(String.IsNullOrEmpty(employeeIdFilter.Text))
                return true;
-            return (((item as History)!).UserId.Contains(userIdFilter.Text, StringComparison.OrdinalIgnoreCase));
+            return (((item as History)!).EmployeeId.Contains(employeeIdFilter.Text, StringComparison.OrdinalIgnoreCase));
         }
 
         private bool FullNameFilter(object item)
@@ -63,6 +73,26 @@ namespace QRPassWPF.UserControls
             if(String.IsNullOrEmpty(fullNameFilter.Text))
                 return true;
             return (((item as History)!).FullName.Contains(fullNameFilter.Text, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private bool ActionFilter(object item)
+        {
+            if (string.IsNullOrEmpty(ActionComboBoxFilter.Text) || ActionComboBoxFilter.Text == "------") // ------ means null filter
+                return true;
+            return (((item as History)!).Action.Contains(ActionComboBoxFilter.Text, StringComparison.OrdinalIgnoreCase));
+        }
+        private bool PrevObjectFilter(object item)
+        {
+            if (string.IsNullOrEmpty(prevObjectFilter.Text)) 
+                return true;
+            var prevObject = ((item as History)!).PrevObject; //checking for possible null reference on previous object
+            return prevObject != null && (prevObject.Contains(prevObjectFilter.Text, StringComparison.OrdinalIgnoreCase));
+        }
+        private bool CurrentObjectFilter(object item)
+        {
+            if (string.IsNullOrEmpty(currentObjectFilter.Text) )
+                return true;
+            return (((item as History)!).CurrentObject.Contains(currentObjectFilter.Text, StringComparison.OrdinalIgnoreCase));
         }
     }
     public class GroupFilter
